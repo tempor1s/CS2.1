@@ -70,7 +70,7 @@ def selection_sort(items, ascending=True):
 
 
 
-def insertion_sort(items):
+def insertion_sort(items, ascending=True):
     """Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
     Running time: Average: O(n^2) It uses a nested loop that loops for every element in the array.
@@ -81,13 +81,25 @@ def insertion_sort(items):
         extracted_item = items[i]
         
         # the index of the item we are going to potenially swap with
-        j = i -1
+        j = i - 1
+        
+        # ascending order sort
+        if ascending:
         # while we are not at 0, and our extracted item is less than j - the goal is to decrease all the way down to zero 
-        while j >=0 and extracted_item < items[j]:
-            # swap j+1 with the current item since it is greater than our target
-            items[j+1] = items[j]
-            # decreate j again to keep going backwards
-            j -= 1
+            while j >= 0 and extracted_item < items[j]:
+                # swap j+1 with the current item since it is greater than our target
+                items[j+1] = items[j]
+                # decreate j again to keep going backwards
+                j -= 1
+        # decending order sort
+        else:
+        # while we are not at 0, and our extracted item is greater than j - the goal is to increase all the way up
+            while j >= 0 and extracted_item > items[j]:
+                # swap j+1 with the current item since it is greater than our target
+                items[j+1] = items[j]
+                # decreate j again to keep going backwards
+                j -= 1
+            
         # finally, swap our extracted item with the element one above
         items[j+1] = extracted_item
         
