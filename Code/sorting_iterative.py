@@ -67,6 +67,21 @@ def insertion_sort(items):
     order in front of items, and repeating until all items are in order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Take first unsorted item
-    # TODO: Insert it in sorted order in front of items
+    # loop from 1 to len of items, we start at one because we are assuming 1 is already sorted
+    for i in range(1, len(items)):
+        # extract the element we are currently on
+        extracted_item = items[i]
+        
+        # the index of the item we are going to potenially swap with
+        j = i -1
+        # while we are not at 0, and our extracted item is less than j - the goal is to decrease all the way down to zero 
+        while j >=0 and extracted_item < items[j]:
+            # swap j+1 with the current item since it is greater than our target
+            items[j+1] = items[j]
+            # decreate j again to keep going backwards
+            j -= 1
+        # finally, swap our extracted item with the element one above
+        items[j+1] = extracted_item
+        
+    # return the sorted items
+    return items
