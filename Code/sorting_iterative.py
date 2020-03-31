@@ -42,7 +42,7 @@ def bubble_sort(items, ascending=True):
     return items
 
 
-def selection_sort(items):
+def selection_sort(items, ascending=True):
     """Sort given items by finding minimum item, swapping it with first
     unsorted item, and repeating until all items are in sorted order.
     Running time: O(N^2) Because we have to loop through every item n times to sort
@@ -53,8 +53,13 @@ def selection_sort(items):
         smallest_index = i
         # loop from that index 
         for j in range(i, len(items)):
-            if items[j] < items[smallest_index]:
-                smallest_index = j
+            if ascending:
+                if items[j] < items[smallest_index]:
+                    smallest_index = j
+            else:
+                if items[j] > items[smallest_index]:
+                    smallest_index = j
+
         items[i], items[smallest_index] = items[smallest_index], items[i]
     
     return items
