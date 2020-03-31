@@ -1,13 +1,17 @@
 #!python
 
 
-def is_sorted(items):
+def is_sorted(items, ascending=True):
     """Return a boolean indicating whether given items are in sorted order.
     Running time: O(n) Worse case because we have to check all the way to the end
     Memory usage: O(n) It just needs the items passed in, it does not allocate any new memory."""
     for i in range(len(items) - 1):
-        if items[i] > items[i + 1]:
-            return False
+        if ascending:
+            if items[i] > items[i + 1]:
+                return False
+        else:
+            if items[i] < items[i + 1]:
+                return False
     return True
 
     # one line :)
