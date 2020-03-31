@@ -41,13 +41,13 @@ def bubble_sort(items, ascending=True):
             if ascending:
                 # traverse array swapping elements
                 if items[j] > items[j + 1]:
-                    # swap the current and next element, yat python!
+                    # swap the current and next element, yay python!
                     items[j], items[j + 1] = items[j + 1], items[j]
             # Sort in descending order
             else:
                 # traverse array swapping elements
                 if items[j] < items[j + 1]:
-                    # swap the current and next element, yat python!
+                    # swap the current and next element, yay python!
                     items[j], items[j + 1] = items[j + 1], items[j]
 
     # return the sorted items
