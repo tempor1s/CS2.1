@@ -5,13 +5,22 @@ def is_sorted(items, ascending=True):
     """Return a boolean indicating whether given items are in sorted order.
     Running time: O(n) Worse case because we have to check all the way to the end
     Memory usage: O(n) It just needs the items passed in, it does not allocate any new memory."""
+    # loop through all items (yay zero indexing!)
     for i in range(len(items) - 1):
+        # for checking an ascending sort order function
         if ascending:
+            # check if current item is greater than the next item in the list
             if items[i] > items[i + 1]:
+                # if it is, it is not sorted - we can return false
                 return False
+        # for checking in descending order
         else:
+            # check if the current item is less than the next item in the list
             if items[i] < items[i + 1]:
+                # if it is, it is not sorted - we can return false
                 return False
+    
+    # if we get through the loop without returning False, the list is sorted!
     return True
 
     # one line :)
@@ -22,7 +31,6 @@ def bubble_sort(items, ascending=True):
     repeating until all items are in sorted order.
     Running time: O(n^2) We use a nested for loop :)
     Memory usage: O(n) - We do not store any data, just move things around. It scales with the amount of items."""
-
     # slightly faster because we ignore already sorted elements
     # traverse though all elements n times
     len_of_items = len(items)
@@ -54,17 +62,21 @@ def selection_sort(items, ascending=True):
     # loop from 0 to len(items - 1)
     for i in range(len(items) - 1):
         # keep a reference of the smallest index we have found ever iteration (current index to start)
-        smallest_index = i
+        working_index = i
         # loop from that index 
         for j in range(i, len(items)):
+            # sort in ascending order
             if ascending:
-                if items[j] < items[smallest_index]:
-                    smallest_index = j
+                # if the item we are currently on is smaller than the smallest index, set the smallest idx to that number
+                if items[j] < items[working_index]:
+                    working_index = j
+            # sort in descending order
             else:
-                if items[j] > items[smallest_index]:
-                    smallest_index = j
+                # if the item we are currently on is larger than the working_index, set the working_index to that number
+                if items[j] > items[working_index]:
+                    working_index = j
 
-        items[i], items[smallest_index] = items[smallest_index], items[i]
+        items[i], items[working_index] = items[working_index], items[i]
     
     return items
 
