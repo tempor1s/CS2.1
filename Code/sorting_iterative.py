@@ -18,16 +18,7 @@ def bubble_sort(items, ascending=True):
     repeating until all items are in sorted order.
     Running time: O(n^2) We use a nested for loop :)
     Memory usage: O(n) - We do not store any data, just move things around. It scales with the amount of items."""
-    # for item list:
-    # check if current item value is less than i + 1
-    # if it is, swap them, otherwise continue
 
-    # pretty good solution, but we can go a bit faster!
-    #  for _ in range(len(items)):
-    #      for i in range(len(items) - 1):
-    #          if items[i] > items[i + 1]:
-    #              items[i], items[i + 1] = items[i + 1], items[i]
-   
     # slightly faster because we ignore already sorted elements
     # traverse though all elements n times
     len_of_items = len(items)
