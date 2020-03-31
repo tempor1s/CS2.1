@@ -3,26 +3,21 @@
 
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
-    TODO: Running time: O(n) Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # Psuedo Code
-    # Loop from the beginning given n, and check to see if n value > n + 1 value
-    # if n value > n + 1 value, return false because it is not sorted
-    # otherwise continue
-    # if we reach the end without returning False, it is sorted so we can just return true
-    
-    # Not bad, but we could one line!
-    #  for i in range(len(items) - 1):
-    #      if items[i] > items[i + 1]:
-    #          return False
-    #  return True
-    return True if all([items[i] <= items[i + 1] for i in range((len(items) - 1))]) else False
+    Running time: O(n) Worse case because we have to check all the way to the end
+    Memory usage: O(n) It just needs the items passed in, it does not allocate any new memory."""
+    for i in range(len(items) - 1):
+        if items[i] > items[i + 1]:
+            return False
+    return True
+
+    # one line :)
+    #  return True if all([items[i] <= items[i + 1] for i in range((len(items) - 1))]) else False
 
 def bubble_sort(items):
     """Sort given items by swapping adjacent items that are out of order, and
     repeating until all items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(n^2) We use a nested for loop :)
+    Memory usage: O(n) - We do not store any data, just move things around. It scales with the amount of items."""
     # for item list:
     # check if current item value is less than i + 1
     # if it is, swap them, otherwise continue
@@ -37,22 +32,27 @@ def bubble_sort(items):
     # traverse though all elements n times
     len_of_items = len(items)
     for i in range(len_of_items):
-        # last elements are already in place :) 
+        # last elements are already in place :)
         for j in range(0, len_of_items-i-1):
             # traverse array swapping elements
                 if items[j] > items[j + 1]:
+                    # swap the current and next element, yat python!
                     items[j], items[j + 1] = items[j + 1], items[j]
-
+    
+    # return the sorted items
     return items
 
 
 def selection_sort(items):
     """Sort given items by finding minimum item, swapping it with first
     unsorted item, and repeating until all items are in sorted order.
-    TODO: Running time: O(N^2) Because we have to loop through every item n times to sort
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(N^2) Because we have to loop through every item n times to sort
+    Memory usage: O(n) - It does not store anything, just moves things around!"""
+    # loop from 0 to len(items - 1)
     for i in range(len(items) - 1):
+        # keep a reference of the smallest index we have found ever iteration (current index to start)
         smallest_index = i
+        # loop from that index 
         for j in range(i, len(items)):
             if items[j] < items[smallest_index]:
                 smallest_index = j
@@ -65,8 +65,8 @@ def selection_sort(items):
 def insertion_sort(items):
     """Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: Average: O(n^2) It uses a nested loop that loops for every element in the array.
+    Memory usage: Best: O(n) It does not make any copies, it just moves data around. It scales with the size of the items."""
     # loop from 1 to len of items, we start at one because we are assuming 1 is already sorted
     for i in range(1, len(items)):
         # extract the element we are currently on
