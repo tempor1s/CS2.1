@@ -13,7 +13,7 @@ def is_sorted(items):
     # one line :)
     #  return True if all([items[i] <= items[i + 1] for i in range((len(items) - 1))]) else False
 
-def bubble_sort(items):
+def bubble_sort(items, ascending=True):
     """Sort given items by swapping adjacent items that are out of order, and
     repeating until all items are in sorted order.
     Running time: O(n^2) We use a nested for loop :)
@@ -34,11 +34,19 @@ def bubble_sort(items):
     for i in range(len_of_items):
         # last elements are already in place :)
         for j in range(0, len_of_items-i-1):
-            # traverse array swapping elements
+            # Sort in ascending order (0-9) etc
+            if ascending:
+                # traverse array swapping elements
                 if items[j] > items[j + 1]:
                     # swap the current and next element, yat python!
                     items[j], items[j + 1] = items[j + 1], items[j]
-    
+            # Sort in descending order
+            else:
+                # traverse array swapping elements
+                if items[j] < items[j + 1]:
+                    # swap the current and next element, yat python!
+                    items[j], items[j + 1] = items[j + 1], items[j]
+
     # return the sorted items
     return items
 
@@ -57,7 +65,7 @@ def selection_sort(items):
             if items[j] < items[smallest_index]:
                 smallest_index = j
         items[i], items[smallest_index] = items[smallest_index], items[i]
-
+    
     return items
 
 
