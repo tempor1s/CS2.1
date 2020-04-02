@@ -55,10 +55,18 @@ def merge_sort(items):
     sorting each recursively, and merging results into a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if list is so small it's already sorted (base case)
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half by recursively calling merge sort
-    # TODO: Merge sorted halves into one list in sorted order
+    # base case, we have a single item array
+    if len(items) == 1:
+        return items
+    # split the list into two halves
+    list1, list2 = split(items)
+
+    # merge sort both halves recursively
+    list1 = merge_sort(list1)
+    list2 = merge_sort(list2)
+
+    # merge the two halves :)
+    return merge(list1, list2)
 
 
 def partition(items, low, high):
@@ -93,5 +101,5 @@ if __name__ == "__main__":
     #  print(merge(list1, list2))
 
     to_sort = [3, 7, 4, 3, 2, 1, 6, 7, 123, 9, 4, 12, 6]
-    print(split_sort_merge(to_sort))
+    print(merge_sort(to_sort))
 
