@@ -27,6 +27,11 @@ def merge(items1, items2):
     # return the merged array :)
     return merged_arr
 
+def split(items):
+    """Split a list into two equal halves."""
+    half = len(items) // 2
+    return items[half:], items[:half]
+
 
 def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
@@ -34,9 +39,15 @@ def split_sort_merge(items):
     a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half using any other sorting algorithm
-    # TODO: Merge sorted halves into one list in sorted order
+    # split into two halves
+    list1, list2 = split(items)
+    
+    # sort both halves
+    list1.sort()
+    list2.sort()
+    
+    # merge the two sorted halves
+    return merge(list1, list2)
 
 
 def merge_sort(items):
@@ -76,7 +87,11 @@ def quick_sort(items, low=None, high=None):
     # TODO: Sort each sublist range by recursively calling quick sort
 
 if __name__ == "__main__":
-    list1 = [1, 2, 3, 4, 5]
-    list2 = [1, 3, 4, 6, 7]
+    #  list1 = [1, 2, 3, 4, 5]
+    #  list2 = [1, 3, 4, 6, 7]
+    #
+    #  print(merge(list1, list2))
 
-    print(merge(list1, list2))
+    to_sort = [3, 7, 4, 3, 2, 1, 6, 7, 123, 9, 4, 12, 6]
+    print(split_sort_merge(to_sort))
+
