@@ -19,11 +19,11 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted([-3 , 5, 7]) is True # negative numbers
 
         # test descending order
-        assert is_sorted([], ascending=False)
-        assert is_sorted([3], ascending=False) is True  # Single item is trivially sorted
-        assert is_sorted([3, 3], ascending=False) is True  # Duplicate items are in order
-        assert is_sorted([5, 3], ascending=False) is True
-        assert is_sorted([7, 5, 3], ascending=False) is True
+        #  assert is_sorted([] )
+        #  assert is_sorted([3] ) is True  # Single item is trivially sorted
+        #  assert is_sorted([3, 3] ) is True  # Duplicate items are in order
+        #  assert is_sorted([5, 3] ) is True
+        #  assert is_sorted([7, 5, 3] ) is True
 
     def test_is_sorted_on_unsorted_integers(self):
         # Negative test cases (counterexamples) with lists of unsorted integers
@@ -32,9 +32,9 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted([7, 5, 3]) is False
         
         # test descending order
-        assert is_sorted([3, 5], ascending=False) is False
-        assert is_sorted([3, 5, 3], ascending=False) is False
-        assert is_sorted([3, 5, 7], ascending=False) is False
+        #  assert is_sorted([3, 5]) is False
+        #  assert is_sorted([3, 5, 3]) is False
+        #  assert is_sorted([3, 5, 7]) is False
 
     def test_is_sorted_on_sorted_strings(self):
         # Positive test cases (examples) with lists of sorted strings
@@ -44,10 +44,10 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted(['A', 'B', 'C']) is True
 
         # test descending order
-        assert is_sorted(['A'], ascending=False) is True  # Single item is trivially sorted
-        assert is_sorted(['A', 'A'], ascending=False) is True  # Duplicate items are in order
-        assert is_sorted(['B', 'A'], ascending=False) is True
-        assert is_sorted(['C', 'B', 'A'], ascending=False) is True
+        #  assert is_sorted(['A'] ) is True  # Single item is trivially sorted
+        #  assert is_sorted(['A', 'A'] ) is True  # Duplicate items are in order
+        #  assert is_sorted(['B', 'A'] ) is True
+        #  assert is_sorted(['C', 'B', 'A'] ) is True
 
     def test_is_sorted_on_unsorted_strings(self):
         # Negative test cases (counterexamples) with lists of unsorted strings
@@ -56,9 +56,9 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted(['C', 'B', 'A']) is False
 
         # test descending order
-        assert is_sorted(['A', 'B'], ascending=False) is False
-        assert is_sorted(['A', 'B', 'A'], ascending=False) is False
-        assert is_sorted(['A', 'B', 'C'], ascending=False) is False
+        #  assert is_sorted(['A', 'B'] ) is False
+        #  assert is_sorted(['A', 'B', 'A'] ) is False
+        #  assert is_sorted(['A', 'B', 'C'] ) is False
 
     def test_is_sorted_on_sorted_tuples(self):
         # Positive test cases (examples) with lists of sorted tuples
@@ -77,11 +77,11 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted([(3, 'A'), (5, 'A')]) is True  # First item sorted
         assert is_sorted([(3, 'A'), (3, 'B')]) is True  # Second item sorted
 
-        assert is_sorted([('B', 5), ('A', 3)], ascending=False) is True  # Both items sorted
-        assert is_sorted([('B', 3), ('A', 3)], ascending=False) is True  # First item sorted
-        assert is_sorted([('A', 5), ('A', 3)], ascending=False) is True  # Second item sorted
-        assert is_sorted([(5, 'B'), (3, 'A')], ascending=False) is True  # Both items sorted
-        assert is_sorted([(5, 'A'), (3, 'A')], ascending=False) is True  # First item sorted
+        #  assert is_sorted([('B', 5), ('A', 3)] ) is True  # Both items sorted
+        #  assert is_sorted([('B', 3), ('A', 3)] ) is True  # First item sorted
+        #  assert is_sorted([('A', 5), ('A', 3)] ) is True  # Second item sorted
+        #  assert is_sorted([(5, 'B'), (3, 'A')] ) is True  # Both items sorted
+        #  assert is_sorted([(5, 'A'), (3, 'A')] ) is True  # First item sorted
 
     def test_is_sorted_on_unsorted_tuples(self):
         # Negative test cases (counterexamples) with lists of unsorted tuples
@@ -93,12 +93,12 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted([('A', 5), ('A', 3)]) is False  # Second item unsorted
 
         # descending order
-        assert is_sorted([(3, 'A'), (5, 'B')], ascending=False) is False  # Both items unsorted
-        assert is_sorted([(3, 'B'), (5, 'A')], ascending=False) is False  # First item unsorted
-        assert is_sorted([(3, 'A'), (3, 'B')], ascending=False) is False  # Second item unsorted
-        assert is_sorted([('A', 3), ('B', 5)], ascending=False) is False  # Both items unsorted
-        assert is_sorted([('A', 5), ('B', 3)], ascending=False) is False  # First item unsorted
-        assert is_sorted([('A', 3), ('A', 5)], ascending=False) is False  # Second item unsorted
+        #  assert is_sorted([(3, 'A'), (5, 'B')] ) is False  # Both items unsorted
+        #  assert is_sorted([(3, 'B'), (5, 'A')] ) is False  # First item unsorted
+        #  assert is_sorted([(3, 'A'), (3, 'B')] ) is False  # Second item unsorted
+        #  assert is_sorted([('A', 3), ('B', 5)] ) is False  # Both items unsorted
+        #  assert is_sorted([('A', 5), ('B', 3)] ) is False  # First item unsorted
+        #  assert is_sorted([('A', 3), ('A', 5)] ) is False  # Second item unsorted
 
 
 class IntegerSortTest(unittest.TestCase):
@@ -120,15 +120,15 @@ class IntegerSortTest(unittest.TestCase):
         assert items3 == [3, 5, 7]
 
         # descending order
-        items1 = [3]
-        sort(items1, ascending=False)
-        assert items1 == [3]  # List should not be changed
-        items2 = [3, 5]
-        sort(items2, ascending=False)
-        assert items2 == [5, 3]  # List should be in sorted order
-        items3 = [5, 7, 3]
-        sort(items3, ascending=False)
-        assert items3 == [7, 5, 3]
+        #  items1 = [3]
+        #  sort(items1 )
+        #  assert items1 == [3]  # List should not be changed
+        #  items2 = [3, 5]
+        #  sort(items2 )
+        #  assert items2 == [5, 3]  # List should be in sorted order
+        #  items3 = [5, 7, 3]
+        #  sort(items3 )
+        #  assert items3 == [7, 5, 3]
 
     def test_sort_on_small_lists_of_integers_with_duplicates(self):
         items1 = [3, 3]
@@ -145,18 +145,18 @@ class IntegerSortTest(unittest.TestCase):
         assert items4 == [3, 3, 5, 5, 5, 7, 7, 7, 7]
 
         # descending order
-        items1 = [3, 3]
-        sort(items1, ascending=False)
-        assert items1 == [3, 3]  # List should not be changed
-        items2 = [3, 5, 3]
-        sort(items2, ascending=False)
-        assert items2 == [5, 3, 3]  # List should be in sorted order
-        items3 = [5, 5, 3, 5, 3]
-        sort(items3, ascending=False)
-        assert items3 == [5, 5, 5, 3, 3]
-        items4 = [7, 5, 3, 7, 5, 7, 5, 3, 7]
-        sort(items4, ascending=False)
-        assert items4 == [7, 7, 7, 7, 5, 5, 5, 3, 3]
+        #  items1 = [3, 3]
+        #  sort(items1 )
+        #  assert items1 == [3, 3]  # List should not be changed
+        #  items2 = [3, 5, 3]
+        #  sort(items2 )
+        #  assert items2 == [5, 3, 3]  # List should be in sorted order
+        #  items3 = [5, 5, 3, 5, 3]
+        #  sort(items3 )
+        #  assert items3 == [5, 5, 5, 3, 3]
+        #  items4 = [7, 5, 3, 7, 5, 7, 5, 3, 7]
+        #  sort(items4 )
+        #  assert items4 == [7, 7, 7, 7, 5, 5, 5, 3, 3]
 
     def test_sort_on_lists_of_random_integers(self):
         # Generate list of 10 random integers from range [1...20]
@@ -211,15 +211,15 @@ class StringSortTest(unittest.TestCase):
         assert items3 == ['A', 'B', 'C']
         
         # descending
-        items1 = ['A']
-        sort(items1, ascending=False)
-        assert items1 == ['A']  # List should not be changed
-        items2 = ['B', 'A']
-        sort(items2, ascending=False)
-        assert items2 == ['A', 'B']  # List should be in sorted order
-        items3 = ['B', 'C', 'A']
-        sort(items3, ascending=False)
-        assert items3 == ['A', 'B', 'C']
+        #  items1 = ['A']
+        #  sort(items1)
+        #  assert items1 == ['A']  # List should not be changed
+        #  items2 = ['B', 'A']
+        #  sort(items2)
+        #  assert items2 == ['A', 'B']  # List should be in sorted order
+        #  items3 = ['B', 'C', 'A']
+        #  sort(items3)
+        #  assert items3 == ['A', 'B', 'C']
 
 
 
@@ -265,7 +265,7 @@ def get_sort_function():
 
 
 # If using PyTest, change this variable to the sort function you want to test
-sort = insertion_sort
+sort = merge_sort
 
 
 if __name__ == '__main__':

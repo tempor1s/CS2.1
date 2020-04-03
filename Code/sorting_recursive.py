@@ -4,8 +4,8 @@
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+     Running time: O(m) where m is the list with a lower higher value element
+     Memory usage: O(m + n) The length of the two lists."""
 
     # empty array to add items too
     merged_arr = []
@@ -30,43 +30,49 @@ def merge(items1, items2):
 def split(items):
     """Split a list into two equal halves."""
     half = len(items) // 2
-    return items[half:], items[:half]
+    return items[:half], items[half:]
 
 
 def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(n logn) Sorting both sides take O(logn), and merging is O(n)
+    Memory usage: O(n^2) Merging requires us to make another variable after merging"""
     # split into two halves
     list1, list2 = split(items)
     
-    # sort both halves
+    # sort both halves using any sort :)
     list1.sort()
     list2.sort()
     
-    # merge the two sorted halves
-    return merge(list1, list2)
+    # merge the two sorted halves - mutate the passed array 
+    merged = merge(list1, list2)
+    for i in range(len(items)):
+        items[i] = merged[i]
 
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # base case, we have a single item array
-    if len(items) == 1:
-        return items
-    # split the list into two halves
-    list1, list2 = split(items)
+    Running time: O(n logn) because merge takes O(n) and we split a bunch
+    Memory usage: O(n logn) because of merging creating a new variable every time"""
+    if len(items) > 1:
+        left, right = split(items)
 
-    # merge sort both halves recursively
-    list1 = merge_sort(list1)
-    list2 = merge_sort(list2)
+        merge_sort(left)
+        merge_sort(right)
 
-    # merge the two halves :)
-    return merge(list1, list2)
+        merged = merge(left, right)
+        for i in range(len(items)):
+            items[i] = merged[i]
+
+    # this version does not modify the passed array
+    #  if len(items) <= 1:
+    #      return items
+    #  else:
+    #      left, right = split(items)
+    #      return merge_sort(merge(left), merge(right))
 
 
 def partition(items, low, high):
