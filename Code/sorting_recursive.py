@@ -46,8 +46,7 @@ def split_sort_merge(items):
     list2.sort()
     
     # merge the two sorted halves - mutate the passed array 
-    merged = merge(list1, list2)
-    items[:] = merged
+    items[:] = merge(list1, list2)
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
@@ -61,8 +60,7 @@ def merge_sort(items):
         merge_sort(left)
         merge_sort(right)
 
-        merged = merge(left, right)
-        items[:] = merged
+        items[:] = merge(left, right)
 
     #  this version does not modify the passed array
     #  if len(items) <= 1:
