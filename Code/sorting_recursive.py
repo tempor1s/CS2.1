@@ -20,8 +20,11 @@ def merge(items1, items2):
             # add the item from the second array and go to the next index
             merged_arr.append(items2[j])
             j += 1
+
     # sometimes, we will not get all the items of the "second" loop so we need to add them after looping
-    merged_arr = merged_arr + items1[i:] + items2[j:]
+    # (we use merge here because it is more efficent)
+    merged_arr.extend(items1[i:])
+    merged_arr.extend(items2[j:])
 
     # return the merged array :)
     return merged_arr
@@ -100,7 +103,15 @@ if __name__ == "__main__":
     #  list2 = [1, 3, 4, 6, 7]
     #
     #  print(merge(list1, list2))
-
-    to_sort = [3, 7, 4, 3, 2, 1, 6, 7, 123, 9, 4, 12, 6]
-    print(merge_sort(to_sort))
-
+    
+    list1 = [1, 2]
+    list2 = [3, 4]
+    print(list1)
+    print(list2)
+    print(list1 + list2)
+    print(list1)
+    print(list2)
+    print()
+    list1 = list1 + list2
+    print(list1)
+    print(list2)
