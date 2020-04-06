@@ -54,6 +54,7 @@ def merge_sort(items):
     sorting each recursively, and merging results into a list in sorted order.
     Running time: O(n logn) because merge takes O(n) and we split a bunch
     Memory usage: O(n logn) because of merging creating a new variable every time"""
+    # modify the original array
     if len(items) > 1:
         left, right = split(items)
 
@@ -61,8 +62,7 @@ def merge_sort(items):
         merge_sort(right)
 
         merged = merge(left, right)
-        for i in range(len(items)):
-            items[i] = merged[i]
+        items[:] = merged
 
     #  this version does not modify the passed array
     #  if len(items) <= 1:
