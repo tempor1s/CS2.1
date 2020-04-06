@@ -22,11 +22,9 @@ def merge(items1, items2):
             j += 1
 
     # sometimes, we will not get all the items of the "second" loop so we need to add them after looping
-    # (we use merge here because it is more efficent and do a check instead of just extending both)
-    if i < len(items1):
-        merged_arr.extend(items1[i:])
-    if j < len(items2):
-        merged_arr.extend(items2[j:])
+    # (we use merge here because it is more efficent, but only one of them will always be empty)
+    merged_arr.extend(items1[i:])
+    merged_arr.extend(items2[j:])
 
     # return the merged array :)
     return merged_arr
