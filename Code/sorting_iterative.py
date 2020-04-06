@@ -4,7 +4,7 @@
 def is_sorted(items, ascending=True):
     """Return a boolean indicating whether given items are in sorted order.
     Running time: O(n) Worse case because we have to check all the way to the end
-    Memory usage: O(n) It just needs the items passed in, it does not allocate any new memory."""
+    Memory usage: O(1) It just needs the items passed in, it does not allocate any new memory."""
     # loop through all items (yay zero indexing!)
     for i in range(len(items) - 1):
         # for checking an ascending sort order function
@@ -30,7 +30,7 @@ def bubble_sort(items, ascending=True):
     """Sort given items by swapping adjacent items that are out of order, and
     repeating until all items are in sorted order.
     Running time: O(n^2) We use a nested for loop :)
-    Memory usage: O(n) - We do not store any data, just move things around. It scales with the amount of items."""
+    Memory usage: O(1) - We do not store any data, just move things around. It scales with the amount of items."""
     # slightly faster because we ignore already sorted elements
     # traverse though all elements n times
     len_of_items = len(items)
@@ -86,7 +86,7 @@ def insertion_sort(items, ascending=True):
     """Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
     Running time: Average: O(n^2) It uses a nested loop that loops for every element in the array.
-    Memory usage: Best: O(n) It does not make any copies, it just moves data around. It scales with the size of the items."""
+    Memory usage: Best: O(1) It does not make any copies, it just moves data around. It scales with the size of the items."""
     # loop from 1 to len of items, we start at one because we are assuming 1 is already sorted
     for i in range(1, len(items)):
         # extract the element we are currently on
