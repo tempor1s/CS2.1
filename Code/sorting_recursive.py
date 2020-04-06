@@ -12,7 +12,7 @@ def merge(items1, items2):
 
     # loop until we no longer can for 1 array
     while i < len(items1) and j < len(items2):
-        if items1[i] < items2[j]:
+        if items1[i] <= items2[j]:
             # add the item from the first array and go to next index
             merged_arr.append(items1[i])
             i += 1
@@ -22,9 +22,11 @@ def merge(items1, items2):
             j += 1
 
     # sometimes, we will not get all the items of the "second" loop so we need to add them after looping
-    # (we use merge here because it is more efficent)
-    merged_arr.extend(items1[i:])
-    merged_arr.extend(items2[j:])
+    # (we use merge here because it is more efficent and do a check instead of just extending both)
+    if i < len(items1):
+        merged_arr.extend(items1[i:])
+    if j < len(items2):
+        merged_arr.extend(items2[j:])
 
     # return the merged array :)
     return merged_arr
