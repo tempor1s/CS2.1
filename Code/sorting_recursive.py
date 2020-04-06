@@ -1,6 +1,5 @@
 #!python
 
-
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
@@ -48,9 +47,7 @@ def split_sort_merge(items):
     
     # merge the two sorted halves - mutate the passed array 
     merged = merge(list1, list2)
-    for i in range(len(items)):
-        items[i] = merged[i]
-
+    items[:] = merged
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
@@ -67,7 +64,7 @@ def merge_sort(items):
         for i in range(len(items)):
             items[i] = merged[i]
 
-    # this version does not modify the passed array
+    #  this version does not modify the passed array
     #  if len(items) <= 1:
     #      return items
     #  else:
