@@ -2,7 +2,7 @@
 
 from sorting import random_ints
 from sorting_iterative import is_sorted, bubble_sort, selection_sort, insertion_sort
-from sorting_recursive import split_sort_merge, merge_sort, quick_sort
+from sorting_recursive import split_sort_merge, merge_sort, quick_sort, merge
 from sorting_integer import counting_sort, bucket_sort
 import unittest
 
@@ -236,6 +236,37 @@ class StringSortTest(unittest.TestCase):
         assert items == sorted_items
 
 
+class PivotSortTest(unittest.TestCase):
+    sort = quick_sort
+    def test_pivot(self):
+       pass 
+
+class MergeSortTest(unittest.TestCase):
+    sort = merge_sort
+    def test_merge(self):
+        l1 = [1, 2]
+        l2 = [3, 4]
+        l3 = merge(l1, l2)
+        assert l3 == [1, 2, 3, 4]
+
+    def test_reverse_merge(self):
+        l1 = [3, 4]
+        l2 = [1, 2]
+        l3 = merge(l1, l2)
+        assert l3 == [1, 2, 3, 4]
+
+    def test_merge_larger_l1(self):
+        l1 = [2, 3, 4, 5]
+        l2 = [1]
+        l3 = merge(l1, l2)
+        assert l3 == [1, 2, 3, 4, 5]
+
+    def test_merge_larger_l2(self):
+        l1 = [5]
+        l2 = [1, 2, 3, 6, 7, 9]
+        l3 = merge(l1, l2)
+        assert l3 == [1, 2, 3, 5, 6, 7, 9]
+
 def get_sort_function():
     """Read command-line argument and return sort function with that name."""
     import sys
@@ -263,9 +294,8 @@ def get_sort_function():
                     print('    {}'.format(name))
             return
 
-
 # If using PyTest, change this variable to the sort function you want to test
-sort = quick_sort 
+sort = merge_sort
 
 
 if __name__ == '__main__':
