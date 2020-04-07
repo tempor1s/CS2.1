@@ -73,19 +73,39 @@ def merge_sort(items):
     #      return merge_sort(merge(left), merge(right))
 
 
-def partition(items, low, high):
+def partition(items, start, end):
     """Return index `p` after in-place partitioning given items in range
     `[low...high]` by choosing a pivot (TODO: document your method here) from
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Choose a pivot any way and document your method in docstring above
-    # TODO: Loop through all items in range [low...high]
-    # TODO: Move items less than pivot into front of range [low...p-1]
-    # TODO: Move items greater than pivot into back of range [p+1...high]
-    # TODO: Move pivot item into final position [p] and return index p
+    # start pivot at first item
+    pivot = items[start]
+    low = start + 1
+    high = end
 
+    while True:
+        # if current value we are on is larger than the pivot, it means it is in the correct
+        # place and we can move to the next element
+        # also have to make sure we have not passed or low value, because that means we have already moved
+        # all values to the correct side of the pivot
+        while low <= high and items[high] >= pivot:
+            high -= 1
+        # opposite of above
+        while low <= high and items[low] <= pivot:
+            low += 1
+        # value is either found a value for low and high that are out of order so we swap,
+        # or high and low is out of order so we exit
+        if low <= high:
+            # swap the values at low and high
+            items[low], items[high] = items[high], items[low]
+        else:
+            break
+    
+    items[start], items[high] = items[high], items[start]
+
+    return high
 
 def quick_sort(items, low=None, high=None):
     """Sort given items in place by partitioning items in range `[low...high]`
@@ -93,10 +113,21 @@ def quick_sort(items, low=None, high=None):
     TODO: Best case running time: ??? Why and under what conditions?
     TODO: Worst case running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if high and low range bounds have default values (not given)
-    # TODO: Check if list or range is so small it's already sorted (base case)
-    # TODO: Partition items in-place around a pivot and get index of pivot
-    # TODO: Sort each sublist range by recursively calling quick sort
+    # if no low or high is passed in, calculate them outselves because it is most likely the first call.
+    if low is None or high is None:
+        low = 0
+        high = len(items) - 1
+
+    # base case
+    if low >= high:
+        return
+
+    # partition the items
+    p = partition(items, low, high)
+    # sort both half of the partition recursively
+    quick_sort(items, low, p-1)
+    quick_sort(items, p+1, high)
+
 
 if __name__ == "__main__":
     #  list1 = [1, 2, 3, 4, 5]
