@@ -243,6 +243,7 @@ class PivotSortTest(unittest.TestCase):
 
 class MergeSortTest(unittest.TestCase):
     sort = merge_sort
+    # test merge
     def test_merge(self):
         l1 = [1, 2]
         l2 = [3, 4]
@@ -266,6 +267,24 @@ class MergeSortTest(unittest.TestCase):
         l2 = [1, 2, 3, 6, 7, 9]
         l3 = merge(l1, l2)
         assert l3 == [1, 2, 3, 5, 6, 7, 9]
+
+    # test merge sort
+    def test_merge_sort(self):
+        l1 = [1, 3, 7, 4, 6, 10, 5, 4]
+        merge_sort(l1)
+        assert l1 == [1, 3, 4, 4, 5, 6, 7, 10]
+
+    # test with negatives
+    def test_merge_sort_negs(self):
+        l1 = [-3, 5, -7, -4]
+        merge_sort(l1)
+        assert l1 == [-7, -4, -3, 5]
+
+    # test with strings
+    def test_merge_sort_strings(self):
+        l1 = ["banana", "apple", "orange"]
+        merge_sort(l1)
+        assert l1 == ["apple", "banana", "orange"]
 
 def get_sort_function():
     """Read command-line argument and return sort function with that name."""
