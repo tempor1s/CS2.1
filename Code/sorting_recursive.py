@@ -79,9 +79,9 @@ def partition(items, start, end):
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
     Running Time:
-        Best Case: O(n) - The pivot always picks the correct element.
-        Average Case: O(n * log n) 
-        Worst Case: O(N^2) when we always pick the lowest/highest element to pivot on
+        Best Case: O(n) - The pivot is always the center 
+        Average Case: O(n * log n) the pivot is sometimes the center
+        Worst Case: O(N^2) when we always pick the lowest/highest element to pivot on and never the center
     Memory usage: O(1) We never allocate a new array since we do everything in place."""
     # start pivot at first item
     pivot = items[start]
