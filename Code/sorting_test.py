@@ -2,7 +2,7 @@
 
 from sorting import random_ints
 from sorting_iterative import is_sorted, bubble_sort, selection_sort, insertion_sort
-from sorting_recursive import split_sort_merge, merge_sort, quick_sort, merge
+from sorting_recursive import split_sort_merge, merge_sort, quick_sort, merge, partition
 from sorting_integer import counting_sort, bucket_sort
 import unittest
 
@@ -238,8 +238,30 @@ class StringSortTest(unittest.TestCase):
 
 class PivotSortTest(unittest.TestCase):
     sort = quick_sort
-    def test_pivot(self):
-       pass 
+    def test_basic_pivot(self):
+        l1 = [2, 1, 3] 
+        partition(l1, 0, len(l1) - 1)
+        assert l1 == [1, 2, 3]
+
+    def test_larger_pivot(self):
+        l1 = [3, 2, 1, 5, 6]
+        partition(l1, 0, len(l1) - 1)
+        assert l1 == [1, 2, 3, 5, 6]
+    
+    def test_lopsided_pivot(self):
+        l1 = [5, 1, 2, 6, 7, 8, 9, 10]
+        partition(l1, 0, len(l1) - 1)
+        assert l1 == [2, 1, 5, 6, 7, 8, 9, 10]
+
+    def test_low_pivot(self):
+        l1 = [1, 2, 3]
+        partition(l1, 0, len(l1) - 1)
+        assert l1 == [1, 2, 3]
+
+    def test_high_pivot(self):
+        l1 = [3, 5, 6]
+        partition(l1, 0, len(l1) - 1)
+        assert l1 == [3, 5, 6]
 
 class MergeSortTest(unittest.TestCase):
     sort = merge_sort
