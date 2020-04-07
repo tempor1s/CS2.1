@@ -75,16 +75,20 @@ def merge_sort(items):
 
 def partition(items, start, end):
     """Return index `p` after in-place partitioning given items in range
-    `[low...high]` by choosing a pivot (TODO: document your method here) from
+    `[low...high]` by choosing a pivot (the first item in the array) from
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running Time:
+        Best Case: O(n) - The pivot always picks the correct element.
+        Average Case: O(n * log n) 
+        Worst Case: O(N^2) when we always pick the lowest/highest element to pivot on
+    Memory usage: O(1) We never allocate a new array since we do everything in place."""
     # start pivot at first item
     pivot = items[start]
     low = start + 1
     high = end
 
+    # loop until we are no longer in order
     while True:
         # if current value we are on is larger than the pivot, it means it is in the correct
         # place and we can move to the next element
@@ -110,9 +114,11 @@ def partition(items, start, end):
 def quick_sort(items, low=None, high=None):
     """Sort given items in place by partitioning items in range `[low...high]`
     around a pivot item and recursively sorting each remaining sublist range.
-    TODO: Best case running time: ??? Why and under what conditions?
-    TODO: Worst case running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running Time:
+        Best Case: O(n) - The pivot always picks the correct element.
+        Average Case: O(n * log n) We amoratize it not always picking the middle value to pivot from.
+        Worst Case: O(N^2) when we always pick the lowest/highest element to pivot on
+    Memory usage: O(1) We do not allocate more memory since we do everything in place."""
     # if no low or high is passed in, calculate them outselves because it is most likely the first call.
     if low is None or high is None:
         low = 0
@@ -128,21 +134,3 @@ def quick_sort(items, low=None, high=None):
     quick_sort(items, low, p-1)
     quick_sort(items, p+1, high)
 
-
-if __name__ == "__main__":
-    #  list1 = [1, 2, 3, 4, 5]
-    #  list2 = [1, 3, 4, 6, 7]
-    #
-    #  print(merge(list1, list2))
-    
-    list1 = [1, 2]
-    list2 = [3, 4]
-    print(list1)
-    print(list2)
-    print(list1 + list2)
-    print(list1)
-    print(list2)
-    print()
-    list1 = list1 + list2
-    print(list1)
-    print(list2)
