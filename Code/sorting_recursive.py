@@ -3,8 +3,9 @@
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-     Running time: O(m) where m is the list with a lower higher value element
-     Memory usage: O(m + n) The length of the two lists."""
+     Running time: O(m + n) because we have to add the size of the smaller list to merged_arr, and then add the remaining to it.
+     Then we need to update the original array 
+     Memory usage: O(m + n) The length of the two input lists."""
 
     # empty array to add items too
     merged_arr = []
@@ -39,7 +40,7 @@ def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    Running time: O(n logn) Sorting both sides take O(logn), and merging is O(n)
+    Running time: O(n + n logn) Sorting both sides take O(n * log n), and merging is O(n)
     Memory usage: O(n^2) Merging requires us to make another variable after merging"""
     # split into two halves
     list1, list2 = split(items)
