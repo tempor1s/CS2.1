@@ -1,4 +1,5 @@
 #!python
+from random import randint
 
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
@@ -80,16 +81,19 @@ def partition(items, start, end):
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
     Running Time:
-        Best Case: O(n) - The pivot is always the center 
+        Best Case: O(n) - The pivot is always the center
         Average Case: O(n * log n) the pivot is sometimes the center
         Worst Case: O(N^2) when we always pick the lowest/highest element to pivot on and never the center
     Memory usage: O(1) We never allocate a new array since we do everything in place."""
-    # start pivot at first item
+
+    # use random item as pivot to improve worst case :)
+    pivot_index = randint(start, end)
+    items[pivot_index], items[start] = items[pivot_index], items[start]
+
     pivot = items[start]
     low = start + 1
     high = end
 
-    # loop until we are no longer in order
     while True:
         # if current value we are on is larger than the pivot, it means it is in the correct
         # place and we can move to the next element
@@ -107,10 +111,22 @@ def partition(items, start, end):
             items[low], items[high] = items[high], items[low]
         else:
             break
-    
+
     items[start], items[high] = items[high], items[start]
 
     return high
+
+#  def partition(items, low, high):
+#      follower = low
+#      leader = low
+#
+#      while leader < high:
+#          if items[leader] <= items[high]:
+#              items[follower], items[leader] = items[leader], items[follower]
+#              follower += 1
+#          leader += 1
+#      items[follower], items[high] = items[high], items[follower]
+#      return follower
 
 def quick_sort(items, low=None, high=None):
     """Sort given items in place by partitioning items in range `[low...high]`
@@ -119,19 +135,16 @@ def quick_sort(items, low=None, high=None):
         Best Case: O(n) - The pivot always picks the correct element.
         Average Case: O(n * log n) We amoratize it not always picking the middle value to pivot from.
         Worst Case: O(N^2) when we always pick the lowest/highest element to pivot on
-    Memory usage: O(1) We do not allocate more memory since we do everything in place."""
+    Memory usage: O(log n) We do not allocate more memory since we do everything in place, but the call stack takes memory.."""
     # if no low or high is passed in, calculate them outselves because it is most likely the first call.
-    if low is None or high is None:
+    if low is None and high is None:
         low = 0
         high = len(items) - 1
 
-    # base case
-    if low >= high:
-        return
-
-    # partition the items
-    p = partition(items, low, high)
-    # sort both half of the partition recursively
-    quick_sort(items, low, p-1)
-    quick_sort(items, p+1, high)
+    if low < high:
+        # partition the items
+        p = partition(items, low, high)
+        # sort both half of the partition recursively
+        quick_sort(items, low, p-1)
+        quick_sort(items, p+1, high)
 
