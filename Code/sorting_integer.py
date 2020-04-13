@@ -1,4 +1,5 @@
 #!python
+from collections import defaultdict
 
 
 def counting_sort(numbers):
@@ -13,11 +14,24 @@ def counting_sort(numbers):
     for num in numbers:
         count[num] += 1 # increment occurance
     
-    i = 0
-    for count_index in range(m): # loop until our largest number (+1 because range does not include the max value :))
-        for _ in range(count[count_index]): # add the item x amount of times (will ignore 0)
-            numbers[i] = count_index
-            i += 1
+    write_pos = 0
+    for write_val in range(m): # loop until our largest number (+1 because range does not include the max value :))
+        for _ in range(count[write_val]): # add the item x amount of times (will ignore 0)
+            numbers[write_pos] = write_val # write to that index thge valui 
+            wirte_pos += 1
+
+# def counting_sort(numbers):
+#     max_val = max(numbers)
+#     min_val = min(numbers)
+#     count = defaultdict(int)
+    
+#     for i in numbers:
+#         count[i] += 1
+#     result = []
+#     for j in range(min_val, max_val + 1):
+#         result.extend([j] * count[j])
+#     return result
+
 
 def bucket_sort(numbers, num_buckets=10):
     """Sort given numbers by distributing into buckets representing subranges,
@@ -33,5 +47,5 @@ def bucket_sort(numbers, num_buckets=10):
 
 if __name__ == '__main__':
     a = [1, 4, 5, 6, 1, 2, 4, 5, 8, 1, 4, 8]
-    counting_sort(a)
-    print(a)
+    b = counting_sort(a)
+    print(b)
