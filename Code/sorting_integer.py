@@ -1,5 +1,7 @@
 #!python
 from collections import defaultdict
+from sorting_iterative import insertion_sort
+import math
 
 
 def counting_sort(numbers):
@@ -33,19 +35,48 @@ def counting_sort(numbers):
 #     return result
 
 
-def bucket_sort(numbers, num_buckets=10):
+def bucket_sort(numbers, num_buckets=None):
     """Sort given numbers by distributing into buckets representing subranges,
     then sorting each bucket and concatenating all buckets in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Find range of given numbers (minimum and maximum values)
-    # TODO: Create list of buckets to store numbers in subranges of input range
-    # TODO: Loop over given numbers and place each item in appropriate bucket
-    # TODO: Sort each bucket using any sorting algorithm (recursive or another)
-    # TODO: Loop over buckets and append each bucket's numbers into output list
-    # FIXME: Improve this to mutate input instead of creating new output list
+    TODO: Running time: O(??)
+    TODO: Memory usage: O(??)"""
+    # get hash codes (max value, bucket count)
+    code = hashing(numbers)
+    # create our empty buckets (if they specify a 
+    # value we use that many buckets otherwise we do it dynamically)
+    if num_buckets is None:
+        buckets = [[] for _ in range(code[1])]
+    else:
+        buckets = [[] for _ in range(num_buckets)]
+
+    # disperse our data into the buckets - O(n)
+    for num in numbers:
+        # rehash the value into one of the buckets (similar to hash(num))
+        rehashed_value = num // code[0] * (code[1] - 1)
+        # find the bucket based off of the index (after 'hash')
+        bucket = buckets[rehashed_value]
+        # append the value to said bucket
+        bucket.append(num)
+    
+    # sort the elements in each bucket using insertion sort - O(n)
+    for bucket in buckets:
+        insertion_sort(bucket)
+    
+    # keep track of the value to write to
+    write_index = 0
+    # merge all the buckets back together in sorted order - O(n)
+    for bucket in range(len(buckets)):
+        # loop through every value in the bucket
+        for value in buckets[bucket]:
+            # write the value (sorted) into our input array
+            numbers[write_index] = value
+            # increase the element of the place we are going to write to
+            write_index += 1
+
+def hashing(numbers):
+    return [max(numbers), int(math.sqrt(len(numbers)))]
 
 if __name__ == '__main__':
     a = [1, 4, 5, 6, 1, 2, 4, 5, 8, 1, 4, 8]
-    b = counting_sort(a)
-    print(b)
+    bucket_sort(a)
+    print(a)
