@@ -8,7 +8,7 @@ class PrefixTreeNode:
     the tree's root node to a terminal node that marks the end of the string."""
 
     # Choose a type of data structure to store children nodes in
-    CHILDREN_TYPE = dict()
+    CHILDREN_TYPE = dict
 
     def __init__(self, character=None):
         """Initialize this prefix tree node with the given character value, an
@@ -16,7 +16,7 @@ class PrefixTreeNode:
         # Character that this node represents
         self.character = character
         # Data structure to associate character keys to children node values
-        self.children = PrefixTreeNode.CHILDREN_TYPE
+        self.children = PrefixTreeNode.CHILDREN_TYPE()
         # Marks if this node terminates a string in the prefix tree
         self.terminal = False
 
