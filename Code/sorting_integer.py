@@ -2,6 +2,7 @@
 from collections import defaultdict
 from sorting_iterative import insertion_sort
 import math
+from random import randint
 
 
 def counting_sort(numbers):
@@ -40,7 +41,7 @@ def bucket_sort(numbers, num_buckets=None):
     then sorting each bucket and concatenating all buckets in sorted order.
     TODO: Running time: O(??)
     TODO: Memory usage: O(??)"""
-    # get hash codes (max value, bucket count)
+    # get hash codes (max value, buckets to use)
     code = hashing(numbers)
     # create our empty buckets (if they specify a 
     # value we use that many buckets otherwise we do it dynamically)
@@ -51,10 +52,11 @@ def bucket_sort(numbers, num_buckets=None):
 
     # disperse our data into the buckets - O(n)
     for num in numbers:
-        # rehash the value into one of the buckets (similar to hash(num))
-        rehashed_value = num // code[0] * (code[1] - 1)
+        # index = int(num / code[0] * (code[1] - 1))
+        # get the index of the bucket that we are going to insert the item into
+        index = randint(0, code[1] - 1)
         # find the bucket based off of the index (after 'hash')
-        bucket = buckets[rehashed_value]
+        bucket = buckets[index]
         # append the value to said bucket
         bucket.append(num)
     
