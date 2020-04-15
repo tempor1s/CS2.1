@@ -41,20 +41,21 @@ def bucket_sort(numbers, num_buckets=None):
     then sorting each bucket and concatenating all buckets in sorted order.
     TODO: Running time: O(??)
     TODO: Memory usage: O(??)"""
-    # get hash codes (max value, buckets to use)
-    code = hashing(numbers)
+    max_value = max(numbers)
+    # dynamic bucket allocation
+    d_buckets = int(math.sqrt(len(numbers)))
+
     # create our empty buckets (if they specify a 
     # value we use that many buckets otherwise we do it dynamically)
     if num_buckets is None:
-        buckets = [[] for _ in range(code[1])]
+        buckets = [[] for _ in range(d_buckets)]
     else:
         buckets = [[] for _ in range(num_buckets)]
 
     # disperse our data into the buckets - O(n)
     for num in numbers:
-        # index = int(num / code[0] * (code[1] - 1))
+        index = int(num / max_value * (d_buckets - 1))
         # get the index of the bucket that we are going to insert the item into
-        index = randint(0, code[1] - 1)
         # find the bucket based off of the index (after 'hash')
         bucket = buckets[index]
         # append the value to said bucket
@@ -74,9 +75,6 @@ def bucket_sort(numbers, num_buckets=None):
             numbers[write_index] = value
             # increase the element of the place we are going to write to
             write_index += 1
-
-def hashing(numbers):
-    return [max(numbers), int(math.sqrt(len(numbers)))]
 
 if __name__ == '__main__':
     a = [1, 4, 5, 6, 1, 2, 4, 5, 8, 1, 4, 8]

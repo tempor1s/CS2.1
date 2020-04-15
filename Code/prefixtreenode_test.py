@@ -9,13 +9,14 @@ class PrefixTreeNodeTest(unittest.TestCase):
     def test_init_and_properties(self):
         character = 'A'
         node = PrefixTreeNode(character)
+        print(node.children)
         # Verify node character
         assert isinstance(node.character, str)
         assert node.character is character
         # Verify children nodes structure
-        assert isinstance(node.children, PrefixTreeNode.CHILDREN_TYPE)
+        assert isinstance(node.children, type(PrefixTreeNode.CHILDREN_TYPE))
         assert len(node.children) == 0
-        assert node.children == PrefixTreeNode.CHILDREN_TYPE()
+        assert node.children == PrefixTreeNode.CHILDREN_TYPE
         # Verify terminal boolean
         assert isinstance(node.terminal, bool)
         assert node.terminal is False
