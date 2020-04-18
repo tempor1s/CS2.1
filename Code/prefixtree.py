@@ -39,35 +39,37 @@ class PrefixTree:
 
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
-        # an empty string always exists :)
-        if len(string) == 0:
-            return True
-        
         current_node = self.root
-        for character in string.lower():
-            child_node = current_node.get_child(character)
-            current_node = child_node
+        for character in string:
+            # if the next node exists, traverse
+            if current_node.has_child(character):
+                child_node = current_node.get_child(character)
+                current_node = child_node
+            else:
+                # otherwise, check to see if the node we are at is terminal
+                return current_node.is_terminal()
         
         # if the final node that we get to is terminal
         return current_node.is_terminal()
 
     def insert(self, string):
         """Insert the given string into this prefix tree."""
-        current_node = self.root
-        for character in string.lower():
-            # if the character does not exist add it
-            if not current_node.has_child(character):
-                node = PrefixTreeNode(character)
-                current_node.add_child(character, node)
-            # traverse to the next node
-            current_node = current_node.get_child(character)
-    
-        # word is already in the trie
-        if not current_node.is_terminal():
-            return
-        self.size += 1
-        current_node.terminal = True
-        
+        node = self.root
+        for char in string:
+            # Search for the child
+            if node.has_child(char):
+                # found it so just traverse to next node
+                node = node.get_child(char)
+            else:
+                # create new node and add it
+                new_node = PrefixTreeNode(char)
+                node.add_child(char, new_node)
+                # traverse to next node
+                node = node.get_child(char)
+        # set node to terminal and increment word count if the node is not already terminal
+        if not node.is_terminal():
+            self.size += 1
+            node.terminal = True
 
     def _find_node(self, string):
         """Return a pair containing the deepest node in this prefix tree that
