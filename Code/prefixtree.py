@@ -39,18 +39,18 @@ class PrefixTree:
 
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
-        current_node = self.root
+        node = self.root
         for character in string:
             # if the next node exists, traverse
-            if current_node.has_child(character):
-                child_node = current_node.get_child(character)
-                current_node = child_node
+            if node.has_child(character):
+                child_node = node.get_child(character)
+                node = child_node
             else:
                 # otherwise, check to see if the node we are at is terminal
-                return current_node.is_terminal()
+                return node.is_terminal()
         
         # if the final node that we get to is terminal
-        return current_node.is_terminal()
+        return node.is_terminal()
 
     def insert(self, string):
         """Insert the given string into this prefix tree."""
@@ -65,7 +65,7 @@ class PrefixTree:
                 new_node = PrefixTreeNode(char)
                 node.add_child(char, new_node)
                 # traverse to next node
-                node = node.get_child(char)
+                node = new_node
         # set node to terminal and increment word count if the node is not already terminal
         if not node.is_terminal():
             self.size += 1
@@ -111,7 +111,7 @@ class PrefixTree:
         """Return a list of all strings stored in this prefix tree."""
         # Create a list of all strings in prefix tree
         all_strings = []
-        # add all the strings using our traverses
+        # add all the strings using our traverse
         self._traverse(self.root, '', all_strings.append)
         # return all combos
         return all_strings
@@ -120,17 +120,13 @@ class PrefixTree:
         """Traverse this prefix tree with recursive depth-first traversal.
         Start at the given node with the given prefix representing its path in
         this prefix tree and visit each node with the given visit function."""
-        print('node:', node)
-        if node.is_terminal() == True and node.num_children() == 0:
-            # add phrases built so far
-            visit(prefix)
-        elif node.is_terminal() == True:
-            # add what we have built so far and continue traversal
+        # if we are at the end of a word, then visit it (append)
+        if node.is_terminal():
             visit(prefix)
         for char in node.children.keys():
             # traverse to the next node and build string recursivly
             child = node.get_child(char)
-            string = self._traverse(child, prefix + char, visit)
+            self._traverse(child, prefix + char, visit)
 
 
 
