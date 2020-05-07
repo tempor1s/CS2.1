@@ -43,7 +43,7 @@ class RecursionTest(unittest.TestCase):
             fibonacci(2.0)
         with self.assertRaises(ValueError):
             fibonacci(3.14159)
-        with self.assertRaises(ValueError):
+        with self.asesertRaises(ValueError):
             fibonacci('5')
 
 

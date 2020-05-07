@@ -11,8 +11,8 @@ def fibonacci(n):
         raise ValueError('fibonacci is undefined for n = {!r}'.format(n))
     # Implement fibonacci_recursive, _memoized, and _dynamic below, then
     # change this to call your implementation to verify it passes all tests
-    return fibonacci_recursive(n)
-    # return fibonacci_memoized(n)
+    #  return fibonacci_recursive(n)
+    return fibonacci_memoized(n)
     # return fibonacci_dynamic(n)
 
 
@@ -25,12 +25,20 @@ def fibonacci_recursive(n):
         # Call function recursively and add the results together
         return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
 
+def memoize(f):
+    memo = {}
+    def helper(x):
+        if x not in memo:
+            memo[x] = f(x)
+        return memo[x]
+    return helper
 
+@memoize
 def fibonacci_memoized(n):
-    # TODO: Memoize the fibonacci function's recursive implementation here
-    pass
-    # Once implemented, change fibonacci (above) to call fibonacci_memoized
-    # to verify that your memoized implementation passes all test cases
+    if n < 2:
+        return n
+
+    return fibonacci_memoized(n-1) + fibonacci_memoized(n-2)
 
 
 def fibonacci_dynamic(n):
@@ -45,7 +53,7 @@ def main():
     args = sys.argv[1:]  # Ignore script file name
     if len(args) == 1:
         num = int(args[0])
-        result = fibonacci(num)
+        result = fibonacci_memoized(num)
         print('fibonacci({}) => {}'.format(num, result))
     else:
         print('Usage: {} number'.format(sys.argv[0]))
