@@ -159,7 +159,13 @@ class BinaryMinHeap(object):
         return (index << 1) + 2  # Shift left to multiply by 2
 
 def heap_sort(items):
-    pass
+    heap = BinaryMinHeap(items)
+
+    ordered = []
+    for _ in range(heap.size()):
+        ordered.append(heap.delete_min())
+
+    return ordered
 
 
 def test_binary_min_heap():
@@ -185,6 +191,9 @@ def test_binary_min_heap():
         print('delete_min: {}'.format(heap_min))
         print('heap: {}'.format(heap))
         print('size: {}'.format(heap.size()))
+
+    items = [2, 3, 1, 5, 4]
+    print(heap_sort(items))
 
 
 if __name__ == '__main__':
