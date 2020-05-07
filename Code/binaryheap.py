@@ -162,7 +162,7 @@ def heap_sort(items):
     heap = BinaryMinHeap(items)
 
     ordered = []
-    for _ in range(heap.size()):
+    for _ in range(heap):
         ordered.append(heap.delete_min())
 
     return ordered
